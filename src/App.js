@@ -4,14 +4,41 @@ import { Bounds, GizmoHelper, GizmoViewport, Lightformer, Environment, ArcballCo
 import { EffectComposer, SSAO, SMAA, Selection, Outline } from "@react-three/postprocessing"
 import { Engine } from "./Engine"
 
+const nav = [
+  'machine',
+  'cylender',
+]
+
 export default function App() {
   const [selected, setSelected] = useState('machine')
+  const [active, setActive] = useState('machine')
   return (
     <>
       <div style={ { position: "absolute", zIndex: "1", display: "flex", color: "white", justifyContent: "space-between", padding: "10px" } }>
-        <h1>modal View</h1>
-        <button style={ { backgroundColor: "transparent", color: "white", marginRight: "20px" } } onClick={ () => { setSelected('machine') } }>Machine</button>
-        <button style={ { backgroundColor: "transparent", color: "white", marginRight: "15px" } } onClick={ () => { setSelected('tank') } }>Cylinder</button>
+        <h1 style={ {
+          color: "white",
+          fontSize: "30px",
+          fontWeight: "bold",
+          textShadow: "0px 0px 10px white",
+          margin: "0px",
+          marginRight: "20px"
+        } }>Modal View</h1>
+        {
+          nav.map((item, index) => {
+            return (
+              <button style={ {
+                backgroundColor: active === item ? "white" : "black",
+                color: active === item ? "black" : "white",
+                marginRight: "20px",
+                border: "none",
+                padding: "10px",
+                borderRadius: "10px",
+                cursor: "pointer"
+
+              } } key={ index } onClick={ () => { setSelected(item); setActive(item) } }>{ item }</button>
+            )
+          })
+        }
       </div>
       <Canvas orthographic dpr={ [1, 2] } camera={ { position: [0, 50, 200], fov: 35, near: 1, far: 20 } }>
         <Suspense fallback={ null }>
