@@ -38,7 +38,6 @@ export function Engine({ selected, ...props }) {
 
   const machine = () => {
     const { nodes } = useGLTF("/machine-transformed.glb")
-    console.log(nodes)
     const config = useControls({
       challenger: { challenger: { value: false } },
       all: { value: false },
@@ -142,7 +141,6 @@ export function Engine({ selected, ...props }) {
   const Challenger = () => {
 
     const { nodes } = useGLTF("/challenger_ii.glb")
-    console.log(nodes)
     const challengerConfig = useControls({
       all: { value: false },
       parts: folder(
